@@ -165,7 +165,7 @@ const ProductCard = ({
                 <p className="font-bold product_name  text-[2rem]">
                   {product_name}
                 </p>
-                <p className="">
+                <p className="opacity-[.6] mt-[.5rem]">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </p>
                 <p className="text-[var(--accent-clr)]">
