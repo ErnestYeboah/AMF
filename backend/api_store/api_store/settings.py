@@ -59,9 +59,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://amaetonfashionhouse.vercel.app"
 
-   
 ]
 
 CORS_ALLOW_METHODS = (
@@ -82,9 +80,6 @@ CORS_ALLOW_HEADERS = (
     "x-requested-with",
 )
 
-CSRF_TRUSTED_ORIGINS = [
-     "https://amaetonfashionhouse.vercel.app"
-]
 
 ROOT_URLCONF = 'api_store.urls'
 
