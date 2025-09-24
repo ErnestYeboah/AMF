@@ -1,0 +1,77 @@
+div:has(> .sign_greet) {
+  padding: 1rem;
+  text-align: center;
+}
+
+.sign_greet {
+  font-family: var(--font-1);
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  + p {
+    margin-bottom: var(--padding-1);
+    justify-self: center;
+    justify-items: center;
+
+    .profile_image {
+      background-color: blue;
+      border-radius: 50%;
+      z-index: 1;
+      position: absolute;
+    }
+
+    .avatar,
+    .profile_image {
+      --avatar-size: 6rem;
+      width: var(--avatar-size);
+      font-size: 3rem;
+      height: var(--avatar-size);
+    }
+  }
+
+  .profile_input_group {
+    position: relative;
+    display: grid;
+    justify-items: center;
+
+    & input {
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    & label {
+      position: absolute;
+      background-color: lightgray;
+      text-wrap: nowrap;
+      top: -0.2rem;
+      pointer-events: none;
+      padding: 0.4cqi 0.8cqi;
+      cursor: pointer;
+      border-radius: var(--radius);
+    }
+  }
+}
+
+.auth_form,
+.profile_form {
+  display: grid;
+  margin-inline: auto;
+  width: 60%;
+  gap: var(--gap);
+  justify-items: center;
+
+  .username_input,
+  .input {
+    width: 100%;
+  }
+
+  .avatar {
+    background-color: red;
+  }
+
+  .textfields {
+    > * {
+      margin-bottom: var(--gap);
+    }
+  }
+}

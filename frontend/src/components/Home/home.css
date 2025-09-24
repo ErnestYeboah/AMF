@@ -1,0 +1,153 @@
+.carousel {
+  width: 100%;
+  height: 80vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  height: 100%;
+}
+.slide {
+  min-width: 100%;
+  height: inherit;
+  transition: opacity 300ms;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.radio_btns {
+  height: 2rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  > * {
+    padding: 0 0;
+    width: 50px;
+    height: 5px;
+    --btn-bg: rgba(255, 255, 255, 0.37);
+    background-image: linear-gradient(
+      var(--accent-clr),
+      rgba(255, 255, 255, 0.829)
+    );
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+
+    &.active {
+      animation: progress linear forwards 4000ms;
+    }
+  }
+}
+
+@keyframes progress {
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+.intro {
+  display: grid;
+  width: max(50%, 300px);
+  text-align: center;
+  margin-inline: auto;
+  margin-block: var(--margin);
+
+  & h1 {
+    text-transform: uppercase;
+    font-family: Metal Mania;
+    font-size: 4rem;
+    text-wrap: balance;
+    line-height: 1;
+  }
+
+  & button {
+    justify-self: center;
+    margin-top: var(--gap);
+    --btn-bg: var(--text-clr);
+    --btn-clr: var(--primary-clr);
+  }
+}
+.category_div {
+  @media (width < 992px) {
+    & button {
+      border-radius: 0 0 1rem 0;
+    }
+  }
+}
+.parent_grid {
+  display: grid;
+  grid-auto-rows: 50vh;
+  gap: var(--gap);
+
+  @media (width > 992px) {
+    grid-template-columns: repeat(3, 1fr);
+
+    > * {
+      padding: var(--padding-min);
+    }
+  }
+
+  & .first_child {
+    background-image: url("images/Sudadera holgada con forro térmico de dos tonos….jpeg");
+  }
+  & .second_child {
+    background-image: url("images/sneaker-1.jpeg");
+  }
+  & .last_child {
+    background-image: url("images/accessories.jpeg");
+  }
+}
+
+.just_in_sec {
+  @media (width < 992px) {
+    > * {
+      height: fit-content;
+    }
+
+    & img {
+      width: 100%;
+      height: 40vh;
+    }
+  }
+
+  @media (width > 992px) {
+    grid-auto-rows: 70vh;
+    > * {
+      & img {
+        height: 90%;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+
+    > :nth-child(2) {
+      margin-bottom: -5rem;
+    }
+    > :nth-child(5) {
+      margin-block: 5rem -5rem;
+    }
+  }
+}
+
+.logo_name {
+  font-family: var(--font-3);
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-align: center;
+  margin-top: calc(var(--margin) * 3);
+
+  @media (width < 992px) {
+    margin-top: 2rem;
+  }
+}
+
+footer {
+  padding-inline: var(--margin);
+}

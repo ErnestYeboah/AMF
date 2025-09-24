@@ -1,0 +1,122 @@
+/* for all devices */
+.card__wrapper {
+  display: grid;
+  gap: var(--gap);
+  margin-block-end: var(--padding-inline);
+}
+
+.image__container {
+  border-radius: var(--radius);
+  box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+
+  & img {
+    border-radius: inherit;
+    height: 100%;
+  }
+}
+
+@media (width < 992px) {
+  .cart_card {
+    position: relative;
+    font-size: 1rem;
+    display: grid;
+    gap: var(--gap);
+    grid-auto-rows: 30vh 1fr;
+
+    .text__content_div {
+      background-color: lighgray;
+      box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+      border-radius: var(--radius);
+      padding: var(--padding-1);
+
+      .light_font {
+        opacity: 0.4;
+      }
+    }
+    .prices {
+      align-self: center;
+      margin-inline-end: 2rem;
+    }
+  }
+
+  .checkout__box {
+    box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+    border-radius: var(--radius);
+    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    margin-block: 2rem;
+
+    > * {
+      border-bottom: 1px solid lightgray;
+      padding-block: 0.5cqi;
+    }
+  }
+}
+
+@media (width > 992px) {
+  .cart__container {
+    display: grid;
+    grid-template-columns: auto 20rem;
+    gap: var(--gap);
+  }
+
+  .image__container {
+    height: inherit;
+  }
+
+  .qty_sec {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-min);
+  }
+
+  .checkout__box {
+    box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+    border-radius: var(--radius);
+    position: sticky;
+    top: var(--padding-1);
+    max-height: 60vh;
+    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+
+    > * {
+      border-bottom: 1px solid lightgray;
+      padding-block: 0.5cqi;
+    }
+  }
+
+  .cart_card {
+    height: 30vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: var(--gap);
+    font-size: 1rem;
+
+    > *:not(.image__container) {
+      padding-top: var(--padding-1);
+      align-content: center;
+    }
+
+    .text__content_div {
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+      border-radius: var(--radius);
+      padding-inline: var(--padding-1);
+      align-items: center;
+
+      .light_font {
+        opacity: 0.4;
+      }
+    }
+    .prices {
+      align-self: center;
+      margin-inline-end: 2rem;
+    }
+  }
+}
