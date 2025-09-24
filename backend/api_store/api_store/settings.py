@@ -73,6 +73,19 @@ CORS_ALLOW_METHODS = (
     "PUT",
 )
 
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+
+CSRF_TRUSTED_ORIGINS = [
+     "https://amaetonfashionhouse.vercel.app"
+]
+
 ROOT_URLCONF = 'api_store.urls'
 
 TEMPLATES = [
