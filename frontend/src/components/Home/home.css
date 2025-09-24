@@ -96,13 +96,13 @@
   }
 
   & .first_child {
-    background-image: url("images/Sudadera holgada con forro térmico de dos tonos….jpeg");
+    background-image: url("/images/Sudadera holgada con forro térmico de dos tonos….jpeg");
   }
   & .second_child {
-    background-image: url("images/sneaker-1.jpeg");
+    background-image: url("/images/sneaker-1.jpeg");
   }
   & .last_child {
-    background-image: url("images/accessories.jpeg");
+    background-image: url("/images/accessories.jpeg");
   }
 }
 
