@@ -103,6 +103,9 @@ nav {
   transition: 500ms;
   border-radius: var(--radius);
   z-index: 1000;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(14.6px);
 
   & li {
     cursor: pointer;
@@ -139,11 +142,13 @@ nav {
 }
 
 .profile_modal {
-  /* background-color: rgb(34, 31, 31); */
   position: fixed;
-  top: 3.5rem;
-  right: 3rem;
+  top: 1rem;
+  right: 1rem;
   width: 20rem;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(14.6px);
 
   @media (width < 992px) {
     right: 0;
