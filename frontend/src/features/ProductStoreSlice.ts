@@ -3,8 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// const BASE_URL = `https://productstore.pythonanywhere.com/api`;
-const BASE_URL = `http://127.0.0.1:8000/api`;
+const BASE_URL = `https://productstore.pythonanywhere.com/api`;
 
 export type Product = {
   id: number;
@@ -256,10 +255,13 @@ export const ProductStoreSlice = createSlice({
       })
       .addCase(fetchProductsByCategory.rejected, (state) => {
         state.status = "failed";
-        toast.error("Search field does not match any categories", {
-          autoClose: 3000,
-          hideProgressBar: true,
-        });
+        toast.error(
+          "something happened, check your internet connection and try again later ",
+          {
+            autoClose: 3000,
+            hideProgressBar: true,
+          }
+        );
       })
 
       // get User Profile
@@ -289,7 +291,7 @@ export const ProductStoreSlice = createSlice({
       })
       .addCase(customizeUserProfile.rejected, (state) => {
         state.status = "failed";
-        toast.error("Coould not user profile , try again later", {
+        toast.error("Coould not update user profile , try again later", {
           autoClose: 3000,
           hideProgressBar: true,
         });
