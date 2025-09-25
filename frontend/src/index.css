@@ -31,7 +31,7 @@
   --radius: 10px;
   --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
   --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
-  --step-2: clamp(1.2rem, 2vw, 1.5rem);
+  --step-2: clamp(1.1rem, 2vw, 1.3rem);
   --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
   --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
   --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
@@ -50,7 +50,7 @@
 
 /* for mobile devices */
 
-h2 {
+:where(h2) {
   font-size: var(--step-2);
   line-height: 1;
   text-wrap: balance;

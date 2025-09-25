@@ -3,8 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const BASE_URL = `https://productstore.pythonanywhere.com/api`;
-// const BASE_URL = `http://127.0.0.1:8000/api`;
+const BASE_URL = `http://127.0.0.1:8000/api`;
 
 export type Product = {
   id: number;
