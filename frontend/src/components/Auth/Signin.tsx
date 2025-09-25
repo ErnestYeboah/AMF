@@ -22,7 +22,7 @@ const Signin = () => {
   const showPendingState = useCallback(() => {
     messageApi.open({
       type: "loading",
-      content: "Authenticatin user , please wait.....",
+      content: "Authenticating user , please wait.....",
       duration: 0,
     });
     // Dismiss manually and asynchronously

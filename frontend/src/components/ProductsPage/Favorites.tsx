@@ -8,6 +8,7 @@ import {
   removeItemFromFavorites,
 } from "../../features/FavoriteStoreSlice";
 import { useCookies } from "react-cookie";
+import NoItemPage from "./NoItemPage";
 
 const Favorites = () => {
   const { products } = useSelector(productStoreSlice);
@@ -23,8 +24,7 @@ const Favorites = () => {
   return (
     <Fragment>
       <div className="products__container favorites__container">
-        {favorites &&
-          cookie["token"] &&
+        {favorites && cookie["token"] ? (
           favorites.map((favorite, index) => {
             const product = products.find(
               (item) => item.id === favorite.product_id
@@ -38,7 +38,10 @@ const Favorites = () => {
                 />
               )
             );
-          })}
+          })
+        ) : (
+          <NoItemPage message="No item/s in Favorites" />
+        )}
       </div>
     </Fragment>
   );

@@ -3,10 +3,10 @@ import { cartItemsSlice } from "../../features/CartSlice";
 import { productStoreSlice } from "../../features/ProductStoreSlice";
 import CartProductCard from "./CartProductCard";
 import "./cart.css";
-import { Link } from "react-router-dom";
 import CheckOutModal from "./CheckOutModal";
 import { useCookies } from "react-cookie";
 import { message } from "antd";
+import NoItemPage from "../ProductsPage/NoItemPage";
 
 const CartHome = () => {
   const { cart } = useSelector(cartItemsSlice);
@@ -17,7 +17,7 @@ const CartHome = () => {
   return (
     <>
       {contextHolder}
-      {cart.length > 0 ? (
+      {cart.length > 0 && cookie["token"] ? (
         cookie["token"] && (
           <div className="px-[var(--padding-inline)] cart__container">
             <div className="card__wrapper">
@@ -36,19 +36,7 @@ const CartHome = () => {
           </div>
         )
       ) : (
-        <div className="text-center">
-          <p className=" opacity-[.6] text-[2rem] mt-[var(--margin)] ">
-            No item/s in Cart{" "}
-          </p>
-          {!cookie["token"] && (
-            <p>
-              <Link className="text-[var(--accent-clr)]" to={"/signin"}>
-                Sign In
-              </Link>{" "}
-              to view your items in cart
-            </p>
-          )}
-        </div>
+        <NoItemPage message="No item/s in Cart" />
       )}
     </>
   );
