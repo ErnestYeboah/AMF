@@ -27,9 +27,10 @@ import {
   searchProducts,
   setProfileModalState,
   showSuggestionDiv,
+  toggleDarkMode,
   toggleSidebarView,
 } from "../../features/ProductStoreSlice";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { favoritesProuctsStore } from "../../features/FavoriteStoreSlice";
 import { cartItemsSlice } from "../../features/CartSlice";
 
@@ -51,6 +52,7 @@ const Navbar = () => {
     products,
     profileModalState,
     suggestionsDiv,
+    darkmode,
   } = useSelector(productStoreSlice);
   const { favorites } = useSelector(favoritesProuctsStore);
   const { cart } = useSelector(cartItemsSlice);
@@ -101,9 +103,12 @@ const Navbar = () => {
     dispatch(getSearchParams(product_name));
     dispatch(showSuggestionDiv(false));
   };
+  useEffect(() => {
+    console.log(darkmode);
+  }, [darkmode]);
 
   return (
-    <>
+    <div className="navbar_wrapper">
       {/* for mobile devices */}
       <div className="sticky_nav glass">
         <div className="logo">
@@ -131,7 +136,7 @@ const Navbar = () => {
 
         <div
           onClick={() => dispatch(toggleSidebarView(false))}
-          className="side__bar glass"
+          className="side__bar"
         >
           <p className="px-4">Category</p>
 
@@ -300,6 +305,14 @@ const Navbar = () => {
               <ShoppingCartOutlinedMemo className="icon" />
             </Link>
           </div>
+          <div
+            className={
+              darkmode ? "theme_switcher_btn darkmode" : "theme_switcher_btn"
+            }
+            onClick={() => dispatch(toggleDarkMode(!darkmode ? true : false))}
+          >
+            <span className="ball"></span>
+          </div>
         </div>
       </nav>
 
@@ -354,7 +367,7 @@ const Navbar = () => {
       </div>
 
       {path == "/profile" ? "" : <SearchCategoryMemo />}
-    </>
+    </div>
   );
 };
 

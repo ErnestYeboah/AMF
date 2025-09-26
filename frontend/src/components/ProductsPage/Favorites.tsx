@@ -8,7 +8,7 @@ import {
   removeItemFromFavorites,
 } from "../../features/FavoriteStoreSlice";
 import { useCookies } from "react-cookie";
-import NoItemPage from "./NoItemPage";
+import NoItemPage from "../Cart/NoItemPage";
 
 const Favorites = () => {
   const { products } = useSelector(productStoreSlice);

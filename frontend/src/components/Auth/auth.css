@@ -1,6 +1,8 @@
 div:has(> .sign_greet) {
   padding: 1rem;
   text-align: center;
+  background-color: var(--custom-clr);
+  min-height: 80vh;
 }
 
 .sign_greet {
@@ -14,7 +16,6 @@ div:has(> .sign_greet) {
     justify-items: center;
 
     .profile_image {
-      background-color: blue;
       border-radius: 50%;
       z-index: 1;
       position: absolute;
@@ -63,10 +64,6 @@ div:has(> .sign_greet) {
   .username_input,
   .input {
     width: 100%;
-  }
-
-  .avatar {
-    background-color: red;
   }
 
   .textfields {

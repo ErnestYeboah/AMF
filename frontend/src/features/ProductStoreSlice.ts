@@ -38,6 +38,7 @@ interface State {
   sidebar_isActive: boolean;
   profileModalState: boolean;
   suggestionsDiv: boolean;
+  darkmode: boolean;
 }
 
 const initialState: State = {
@@ -55,6 +56,7 @@ const initialState: State = {
   sidebar_isActive: false,
   profileModalState: false,
   suggestionsDiv: false,
+  darkmode: false,
 };
 
 let all_products_id: any;
@@ -208,6 +210,10 @@ export const ProductStoreSlice = createSlice({
     showSuggestionDiv(state, action) {
       state.suggestionsDiv = action.payload;
     },
+
+    toggleDarkMode(state, action) {
+      state.darkmode = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -352,5 +358,6 @@ export const {
   toggleSidebarView,
   showSuggestionDiv,
   setProfileModalState,
+  toggleDarkMode,
 } = ProductStoreSlice.actions;
 export const productStoreSlice = (state: { products: State }) => state.products;

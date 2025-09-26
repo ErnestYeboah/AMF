@@ -7,7 +7,7 @@ const NoItemPage = ({ message }: { message: string }) => {
 
   return (
     <div className="text-center">
-      <p className=" opacity-[.6] text-[2rem] mt-[var(--margin)] ">{message}</p>
+      <p className="opacity-[.6] text-[2rem] pt-[var(--margin)] ">{message}</p>
       {!cookie["token"] && (
         <p>
           <Link className="text-[var(--accent-clr)]" to={"/signin"}>

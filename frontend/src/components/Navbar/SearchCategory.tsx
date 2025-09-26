@@ -2,10 +2,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchProductsByCategory } from "../../features/ProductStoreSlice";
 
-type Classname = {
-  class_name?: "primary" | "accent";
-};
-
 const categorylist = [
   {
     category: "All",
@@ -32,7 +28,7 @@ const categorylist = [
   },
 ];
 
-const SearchCategory = ({ class_name = "primary" }: Classname) => {
+const SearchCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +41,7 @@ const SearchCategory = ({ class_name = "primary" }: Classname) => {
       {categorylist &&
         categorylist.map((item, index) => (
           <button
-            className={class_name == "primary" ? "primary" : ""}
+            className="search_category_btn"
             key={index}
             onClick={
               item.to

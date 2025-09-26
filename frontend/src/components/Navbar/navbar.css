@@ -1,4 +1,41 @@
 /* for all devices */
+
+.theme_switcher_btn {
+  --width: 30px;
+  width: var(--width);
+  height: 15px;
+  /* outline: 1px solid var(--accent-clr); */
+  border-radius: var(--radius);
+  box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
+  cursor: pointer;
+  transition: 200ms linear;
+  margin-inline-start: 0.5rem;
+
+  .ball {
+    --length: calc(var(--width) / 2);
+    width: var(--length);
+    height: 100%;
+    display: block;
+    background-color: var(--text-clr);
+    border-radius: 50%;
+    transition: 500ms linear;
+  }
+
+  &.darkmode {
+    background-color: var(--accent-clr);
+
+    .ball {
+      background-color: var(--text-clr);
+      translate: var(--length) 0;
+    }
+  }
+}
+
+.navbar_wrapper {
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
+}
+
 .logo {
   position: relative;
   width: max-content;
@@ -33,6 +70,8 @@ nav {
   min-height: 3rem;
   align-items: center;
   max-width: 100%;
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
 
   .search {
     outline: 1px ridge var(--accent-clr);
@@ -71,16 +110,19 @@ nav {
   padding-inline-start: var(--padding-1);
   width: 100%;
   gap: var(--gap);
-  margin-block: var(--padding-1);
-  overflow-x: scroll;
+  padding-block: var(--padding-1);
+
+  @media (width < 992px) {
+    overflow-x: scroll;
+  }
 
   @media (width >= 768px) {
     justify-content: center;
   }
 
-  button.primary {
-    --btn-bg: var(--text-clr);
-    --btn-clr: var(--primary-clr);
+  .search_category_btn {
+    background-color: black;
+    color: white;
   }
 }
 
@@ -102,9 +144,9 @@ nav {
   transition: 500ms;
   border-radius: var(--radius);
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(14.6px);
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
+  box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
 
   & li {
     cursor: pointer;
@@ -145,9 +187,9 @@ nav {
   top: 1rem;
   right: 1rem;
   width: 20rem;
-  background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(14.6px);
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
 
   @media (width < 992px) {
     right: 0;
@@ -190,7 +232,7 @@ nav {
   }
 
   .user_details {
-    color: var(--primary-clr);
+    color: white;
     background-color: #464646;
     border-radius: var(--radius);
     text-align: center;
@@ -210,7 +252,8 @@ nav {
 @media (width < 992px) {
   .sticky_nav {
     width: 100%;
-    background-color: white;
+    background-color: var(--primary-clr);
+    color: var(--text-clr);
     box-shadow: 0px 4px 4px rgba(0 0 0 / 0.3);
     justify-content: space-between;
     padding: 0.5rem 1rem;
@@ -274,6 +317,10 @@ nav {
     transition: translate 500ms;
     font-size: 1.3rem;
     font-family: var(--font-1);
+    font-weight: 300;
+    background-color: var(--primary-clr);
+    color: var(--text-clr);
+    box-shadow: 0px 4px 4px rgba(0 0 0 / 0.2);
 
     &.active {
       translate: 0 0;
@@ -318,7 +365,8 @@ nav {
     padding-top: 1rem;
 
     & input {
-      background-color: wheat;
+      background-color: var(--primary-clr);
+      color: var(--text-clr);
       width: 99%;
     }
   }

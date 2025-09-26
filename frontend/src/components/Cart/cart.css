@@ -2,7 +2,23 @@
 .card__wrapper {
   display: grid;
   gap: var(--gap);
-  margin-block-end: var(--padding-inline);
+  padding-block-end: var(--padding-inline);
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
+
+  &::before {
+    content: "";
+    inset: 0;
+    position: fixed;
+    z-index: -1;
+    background-color: var(--primary-clr);
+  }
+}
+
+.cart_container_wrapper {
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
+  min-height: 80vh;
 }
 
 .image__container {
@@ -49,6 +65,8 @@
     flex-direction: column;
     gap: var(--gap);
     margin-block: 2rem;
+    background-color: var(--primary-clr);
+    color: var(--text-clr);
 
     > * {
       border-bottom: 1px solid lightgray;
@@ -84,6 +102,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap);
+    color: var(--text-clr);
 
     > * {
       border-bottom: 1px solid lightgray;

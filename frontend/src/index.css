@@ -6,6 +6,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: background-color 500ms;
+}
+
+*::before {
+  content: "";
+  position: fixed;
 }
 
 /* for mobile devices */
@@ -39,6 +45,17 @@
   --padding-1: 1rem;
   --margin: clamp(3rem, 3vw, 5rem);
   --padding-inline: clamp(1rem, 3vw, 5rem);
+  --custom-clr: white;
+}
+
+.darkmode {
+  --primary-clr: black;
+  --text-clr: white;
+  --custom-clr: wheat;
+
+  button {
+    background-color: var(--accent-clr);
+  }
 }
 
 .glass {
@@ -99,9 +116,19 @@ img {
 .products__container {
   padding-inline: var(--gap);
   display: grid;
-  --grid-col-count: 6;
+  min-height: 100vh;
   --grid-col-size: 180px;
-  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  --grid-col-count: 6;
+  --grid-col-calc: calc(
+    (100% - var(--gap) * var(--grid-col-count)) / var(--grid-col-count)
+  );
+  --grid-col-max: max(var(--grid-col-size), var(--grid-col-calc));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-col-max)), 1fr)
+  );
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
   gap: var(--gap);
 }
 
@@ -179,6 +206,8 @@ img {
   gap: calc(var(--gap) * 2);
   padding-block-end: var(--padding-inline);
   padding-inline: var(--padding-inline);
+  background-color: var(--primary-clr);
+  color: var(--text-clr);
 
   .image_container {
     position: relative;

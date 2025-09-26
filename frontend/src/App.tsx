@@ -23,29 +23,17 @@ import Favorites from "./components/ProductsPage/Favorites";
 import { getFavoritesItems } from "./features/FavoriteStoreSlice";
 import { getCartItems } from "./features/CartSlice";
 import CartHome from "./components/Cart/CartHome";
-// import emailjs from "@emailjs/browser";
 import SearchedProductPage from "./components/ProductsPage/SearchedProductPage";
 
 const MemoNavBar = React.memo(Navbar);
 function App() {
   const dispatch = useDispatch();
   const [cookie] = useCookies(["token"]);
-  const { sidebar_isActive } = useSelector(productStoreSlice);
+  const { sidebar_isActive, darkmode } = useSelector(productStoreSlice);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-  // const serviceID = "service_23ywtw9";
-  // const templateID = "template_lei0oix";
-  // const public_key = "cthl5Z_PUh6s4qIx2";
-
-  // const templateParams = {
-  //   name: user[0]?.username,
-  //   username: user[0]?.username,
-  //   email: user[0]?.email,
-  //   date: new Date().toLocaleDateString(),
-  // };
 
   // Check if the user is authenticated and fetch user profile
   useEffect(() => {
@@ -59,7 +47,7 @@ function App() {
   }, [cookie]);
 
   return (
-    <>
+    <div className={darkmode ? "darkmode" : ""}>
       <MemoNavBar />
       <ToastContainer />
       <div
@@ -83,7 +71,7 @@ function App() {
           />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -98,8 +98,8 @@ const Signup = () => {
       <p>Create an account to continue</p>
       <form action="" onSubmit={signupUser} className="auth_form" method="post">
         <TextField
-          className=" input username_input"
-          id="outlined-username-input"
+          className="input username_input"
+          id="outlined-username-input input"
           label="Username"
           type="text"
           name="username"

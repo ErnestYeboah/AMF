@@ -3,6 +3,7 @@
   height: 80vh;
   overflow-x: hidden;
   position: relative;
+  background-color: var(--primary-clr);
 }
 
 .slider {
@@ -60,12 +61,23 @@
   margin-inline: auto;
   margin-block: var(--margin);
 
+  /* for darkmode to be effect */
+  &::before {
+    content: "";
+    inset: 0;
+    position: fixed;
+    z-index: -1;
+    background-color: var(--primary-clr);
+    color: var(--text-clr);
+  }
+
   & h1 {
     text-transform: uppercase;
     font-family: Metal Mania;
     font-size: 4rem;
     text-wrap: balance;
     line-height: 1;
+    color: var(--text-clr);
   }
 
   & button {
@@ -142,6 +154,7 @@
   font-size: clamp(2rem, 5vw, 4rem);
   text-align: center;
   margin-top: calc(var(--margin) * 3);
+  color: var(--text-clr);
 
   @media (width < 992px) {
     margin-top: 2rem;
@@ -150,4 +163,5 @@
 
 footer {
   padding-inline: var(--margin);
+  color: var(--text-clr);
 }

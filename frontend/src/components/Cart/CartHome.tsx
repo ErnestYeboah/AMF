@@ -6,7 +6,7 @@ import "./cart.css";
 import CheckOutModal from "./CheckOutModal";
 import { useCookies } from "react-cookie";
 import { message } from "antd";
-import NoItemPage from "../ProductsPage/NoItemPage";
+import NoItemPage from "./NoItemPage";
 
 const CartHome = () => {
   const { cart } = useSelector(cartItemsSlice);
@@ -15,7 +15,7 @@ const CartHome = () => {
   const [, contextHolder] = message.useMessage();
 
   return (
-    <>
+    <div className="cart_container_wrapper">
       {contextHolder}
       {cart.length > 0 && cookie["token"] ? (
         cookie["token"] && (
@@ -38,7 +38,7 @@ const CartHome = () => {
       ) : (
         <NoItemPage message="No item/s in Cart" />
       )}
-    </>
+    </div>
   );
 };
 
