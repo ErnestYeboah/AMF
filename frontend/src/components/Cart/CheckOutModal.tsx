@@ -17,7 +17,7 @@ const CheckOutModal = () => {
   const success = () => {
     messageApi.open({
       type: "success",
-      content: "Checkout completed , thank your for buying from us.",
+      content: "Checkout completed , thank you for buying from us.",
     });
   };
 

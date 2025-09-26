@@ -2,9 +2,7 @@
 .logo {
   position: relative;
   width: max-content;
-  display: flex;
   gap: 0.4rem;
-  align-content: center;
 
   & img {
     width: 20px;
@@ -31,9 +29,10 @@
 nav {
   display: grid;
   padding: var(--padding-min) 1rem;
-
+  overflow-x: hidden;
   min-height: 3rem;
   align-items: center;
+  max-width: 100%;
 
   .search {
     outline: 1px ridge var(--accent-clr);
@@ -266,7 +265,7 @@ nav {
     position: fixed;
     top: 3.2rem;
     left: 0;
-    height: 80vh;
+    min-height: 80vh;
     width: 70%;
     padding-block: var(--padding-inline);
     display: grid;
@@ -292,7 +291,7 @@ nav {
       }
     }
   }
-
+  /* animation */
   @keyframes view {
     to {
       translate: 0 0;
@@ -320,6 +319,7 @@ nav {
 
     & input {
       background-color: wheat;
+      width: 99%;
     }
   }
 }

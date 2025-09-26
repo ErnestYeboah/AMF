@@ -196,7 +196,7 @@ const ProductCard = ({
             </label>
 
             <button className="mx-[auto] block" onClick={addToCart}>
-              {alreadyInCart ? "Aadded To Cart" : "Add To Cart"}
+              {alreadyInCart ? "Added To Cart" : "Add To Cart"}
             </button>
           </div>
         </div>

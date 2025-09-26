@@ -233,7 +233,9 @@ const Navbar = () => {
           </button>
           <ul
             className={
-              suggestionsDiv ? "suggestions_div active" : "suggestions_div"
+              suggestionsDiv
+                ? "suggestions_div glass active"
+                : "suggestions_div"
             }
           >
             {searchSuggestions &&
@@ -313,7 +315,7 @@ const Navbar = () => {
       >
         <div
           className={
-            profileModalState ? "profile_modal active" : "profile_modal"
+            profileModalState ? "profile_modal glass active" : "profile_modal"
           }
         >
           <div className="user_details">
