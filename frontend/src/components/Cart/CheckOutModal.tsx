@@ -30,6 +30,7 @@ const CheckOutModal = () => {
       name: item.product_name,
       units: item.quantity,
       price: item.current_price,
+      size: item.size,
     };
   });
 
