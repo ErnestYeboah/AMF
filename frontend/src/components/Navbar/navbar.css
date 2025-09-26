@@ -29,7 +29,7 @@
 nav {
   display: grid;
   padding: var(--padding-min) 1rem;
-  overflow-x: hidden;
+  overflow: hidden;
   min-height: 3rem;
   align-items: center;
   max-width: 100%;
