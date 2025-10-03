@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "frontend/**",
+      "src": "dist/**",
       "use": "@vercel/static"
     }
   ],
