@@ -59,7 +59,14 @@ const Signup = () => {
   const signupUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (username && password && email !== "") {
-      if (password !== confirmPassword) {
+      if (!email.includes("@")) {
+        messageApi.open({
+          type: "error",
+          content: "invalid email address",
+          duration: 2,
+        });
+        return false;
+      } else if (password !== confirmPassword) {
         messageApi.open({
           type: "error",
           content: "Passwords do not match",

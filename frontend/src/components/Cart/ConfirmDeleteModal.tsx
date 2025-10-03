@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import {
   cartItemsSlice,
   deleteFromCart,
+  deleteItemFromLocalCart,
   getCartItems,
 } from "../../features/CartSlice";
 
@@ -15,15 +16,21 @@ const ConfirmDeleteModal = ({ title, id }: { title: string; id: number }) => {
   const dispatch = useDispatch();
   const [cookie] = useCookies(["token"]);
   const { removing_item_from_cart_status } = useSelector(cartItemsSlice);
-
+  const { localCart } = useSelector(cartItemsSlice);
   const showPopconfirm = () => {
     setOpen(true);
   };
 
   const handleOk = () => {
-    if (id) {
-      setConfirmLoading(true);
-      dispatch(deleteFromCart({ id: id, token: cookie["token"] }));
+    if (cookie["token"]) {
+      if (id) {
+        setConfirmLoading(true);
+        dispatch(deleteFromCart({ id: id, token: cookie["token"] }));
+      }
+    } else {
+      if (localCart) {
+        dispatch(deleteItemFromLocalCart(id));
+      }
     }
   };
   useEffect(() => {

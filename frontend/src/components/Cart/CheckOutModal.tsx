@@ -4,15 +4,23 @@ import { cartItemsSlice } from "../../features/CartSlice";
 import { productStoreSlice } from "../../features/ProductStoreSlice";
 import emailjs from "@emailjs/browser";
 import { message } from "antd";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutModal = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  const { cart } = useSelector(cartItemsSlice);
+  const { cart, localCart } = useSelector(cartItemsSlice);
   const { user } = useSelector(productStoreSlice);
+  const [cookie] = useCookies(["token"]);
+  const navigate = useNavigate();
 
-  const subtotal = cart.reduce((acc, x) => {
-    return acc + x.current_price * x.quantity;
-  }, 0);
+  const subtotal = cookie["token"]
+    ? cart.reduce((acc, x) => {
+        return acc + x.current_price * x.quantity;
+      }, 0)
+    : localCart.reduce((acc, x) => {
+        return acc + x.current_price * x.quantity;
+      }, 0);
 
   const success = () => {
     messageApi.open({
@@ -67,7 +75,10 @@ const CheckOutModal = () => {
           <p className="font-bold">Amaeton Fashion House</p>
           <p>The best and quality goods you can get , free delivery</p>
         </div>
-        <button onClick={checoutTotal} className="mt-[1rem]">
+        <button
+          onClick={cookie["token"] ? checoutTotal : () => navigate("/signin")}
+          className="mt-[1rem]"
+        >
           Checkout ₵{subtotal.toFixed(2)}
         </button>
       </div>

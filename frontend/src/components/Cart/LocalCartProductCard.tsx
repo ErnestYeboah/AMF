@@ -1,29 +1,29 @@
-import { useDispatch, useSelector } from "react-redux";
-import { updateItemQuantity, type CartProduct } from "../../features/CartSlice";
-import { productStoreSlice } from "../../features/ProductStoreSlice";
 import { useState } from "react";
+import {
+  updateLocalCartItemQuantity,
+  type LocalCartProduct,
+} from "../../features/CartSlice";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
-import { useCookies } from "react-cookie";
-// import Spinner from "./Spinner";
+import { useDispatch } from "react-redux";
 
-const CartProductCard = ({ data }: { data: CartProduct }) => {
-  const { id, product_id, product_name, category, quantity, size } =
-    data as CartProduct;
-  const { products } = useSelector(productStoreSlice);
+const LocalCartProductCard = ({ data }: { data: LocalCartProduct }) => {
   const dispatch = useDispatch();
-  const { thumbnail, old_price, price } = products[product_id - 1];
-  const [newQuantity, setNewQuantity] = useState<number>(quantity);
-  const [cookie] = useCookies(["token"]);
+  const {
+    product_name,
+    category,
+    thumbnail,
+    current_price,
+    id,
+    quantity,
+    size,
+    old_price,
+  } = data;
+  const [isLoading] = useState(false);
+  const [newQuantity, setNewQuantity] = useState(quantity);
 
-  const getNewquantity = (e: number) => {
+  const getNewQuantity = (e: number, data: LocalCartProduct) => {
     setNewQuantity(e);
-    dispatch(
-      updateItemQuantity({
-        id,
-        quantity: e,
-        token: cookie["token"],
-      })
-    );
+    dispatch(updateLocalCartItemQuantity({ ...data, quantity: e }));
   };
 
   return (
@@ -41,18 +41,24 @@ const CartProductCard = ({ data }: { data: CartProduct }) => {
               Qty:
               <input
                 type="number"
+                disabled={isLoading}
                 className="bg-gray-300 p-1 w-[5rem] text-center"
                 value={newQuantity}
+                // placeholder={quantity.toString()}
+                onChange={(e) =>
+                  getNewQuantity(Number(e.currentTarget.value), data)
+                }
                 id="quantity"
                 min={1}
-                onChange={(e) => getNewquantity(Number(e.currentTarget.value))}
               />
             </label>
           </div>
         </div>
 
         <div className="prices ">
-          <p className="text-[1.4rem] text-[var(--accent-clr)]">₵{price}</p>
+          <p className="text-[1.4rem] text-[var(--accent-clr)]">
+            ₵{current_price}
+          </p>
           <p>
             <s>₵{old_price}</s>
           </p>
@@ -64,4 +70,4 @@ const CartProductCard = ({ data }: { data: CartProduct }) => {
   );
 };
 
-export default CartProductCard;
+export default LocalCartProductCard;

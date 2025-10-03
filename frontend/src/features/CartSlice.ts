@@ -1,9 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const BASE_URL = `https://amaetonproducts.pythonanywhere.com/api`;
 import { toast } from "react-toastify";
+import { BASE_URL } from "./ProductStoreSlice";
 
+let loadingId: any;
 export type CartProduct = {
+  product_name: string;
+  added_on: string;
+  category: string;
+  id: number;
+  product_id: number;
+  quantity: number;
+  old_price: number;
+  size: string;
+  current_price: number;
+};
+
+export type LocalCartProduct = {
+  thumbnail: string;
   product_name: string;
   added_on: string;
   category: string;
@@ -17,14 +31,30 @@ export type CartProduct = {
 
 interface State {
   cart: CartProduct[];
+  localCart: any[];
   fetching_cart_items_status: "idle" | "pending" | "succeeded" | "failed";
   adding_item_to_cart_status: "idle" | "pending" | "succeeded" | "failed";
   removing_item_from_cart_status: "idle" | "pending" | "succeeded" | "failed";
   updating_item_quantity_status: "idle" | "pending" | "succeeded" | "failed";
 }
 
+const loadCart = () => {
+  try {
+    const savedCart = localStorage.getItem("localCart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};
+
+const saveCart = (cart: any) => {
+  localStorage.setItem("localCart", JSON.stringify(cart));
+};
+
 const initialState: State = {
   cart: [],
+  localCart: loadCart(),
   fetching_cart_items_status: "idle",
   adding_item_to_cart_status: "idle",
   removing_item_from_cart_status: "idle",
@@ -35,11 +65,11 @@ type Payload = {
   token: string;
   product: CartProduct;
 };
+
 export const addItemsToCart: any = createAsyncThunk(
   "add/cart",
   async (payload: Payload) => {
     const { token, product } = payload;
-
     if (token) {
       const response = await axios.post(`${BASE_URL}/cart/`, product, {
         headers: {
@@ -60,8 +90,6 @@ export const getCartItems: any = createAsyncThunk(
         Authorization: `Token ${token}`,
       },
     });
-
-    console.log(response.data);
 
     return response.data;
   }
@@ -120,7 +148,34 @@ export const updateItemQuantity: any = createAsyncThunk(
 export const CartStoreSlice = createSlice({
   initialState,
   name: "cart",
-  reducers: {},
+  reducers: {
+    addToLocalCart(state, action) {
+      state.localCart.push(action.payload);
+      saveCart(state.localCart);
+    },
+    updateLocalCartItemQuantity(state, action) {
+      const index = state.localCart.findIndex(
+        (item) => item.product_name == action.payload.product_name
+      );
+      state.localCart.splice(index, 1, action.payload);
+      saveCart(state.localCart);
+      toast.success("changes applied successfully", {
+        hideProgressBar: true,
+        autoClose: 400,
+      });
+    },
+    deleteItemFromLocalCart(state, action) {
+      const index = state.localCart.findIndex(
+        (item) => item.id == action.payload
+      );
+      state.localCart.splice(index, 1);
+      saveCart(state.localCart);
+      toast.success("item removed from cart successfully", {
+        hideProgressBar: true,
+        autoClose: 400,
+      });
+    },
+  },
   extraReducers(builder) {
     builder
       // adding items to cart
@@ -132,6 +187,7 @@ export const CartStoreSlice = createSlice({
         state.cart.push(action.payload);
         toast.success("Product added to cart successfully", {
           hideProgressBar: true,
+          autoClose: 400,
         });
       })
       .addCase(addItemsToCart.rejected, (state) => {
@@ -140,6 +196,7 @@ export const CartStoreSlice = createSlice({
           "Could not add to cart , item already exists or check your internet connection",
           {
             hideProgressBar: true,
+            autoClose: 400,
           }
         );
       })
@@ -156,6 +213,7 @@ export const CartStoreSlice = createSlice({
         state.fetching_cart_items_status = "failed";
         toast.error("Could not fetch items from cart , check your connection", {
           hideProgressBar: true,
+          autoClose: 400,
         });
       })
 
@@ -167,19 +225,21 @@ export const CartStoreSlice = createSlice({
         state.removing_item_from_cart_status = "succeeded";
         toast.success("Item successfully removed from cart", {
           hideProgressBar: true,
+          autoClose: 400,
         });
       })
       .addCase(deleteFromCart.rejected, (state) => {
         state.removing_item_from_cart_status = "failed";
         toast.error("Something happened , could not remove item from cart", {
           hideProgressBar: true,
+          autoClose: 400,
         });
       })
 
       // updating item quantity
       .addCase(updateItemQuantity.pending, (state) => {
         state.updating_item_quantity_status = "pending";
-        // toast.loading("Applying your changes...");
+        loadingId = toast.loading("Applying your changes...");
       })
       .addCase(updateItemQuantity.fulfilled, (state, action) => {
         state.updating_item_quantity_status = "succeeded";
@@ -188,15 +248,26 @@ export const CartStoreSlice = createSlice({
         );
 
         state.cart.splice(indexOfPayload, 1, action.payload);
+        toast.success("changes applied succesfully", {
+          autoClose: 400,
+          hideProgressBar: true,
+        });
+        toast.dismiss(loadingId);
       })
       .addCase(updateItemQuantity.rejected, (state) => {
         state.updating_item_quantity_status = "failed";
         toast.error("Something happened , could not update product quantity", {
           hideProgressBar: true,
+          autoClose: 400,
         });
       });
   },
 });
 
 export default CartStoreSlice.reducer;
+export const {
+  addToLocalCart,
+  updateLocalCartItemQuantity,
+  deleteItemFromLocalCart,
+} = CartStoreSlice.actions;
 export const cartItemsSlice = (state: { cart: State }) => state.cart;

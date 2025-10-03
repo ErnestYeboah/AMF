@@ -12,7 +12,8 @@ import {
 } from "../../features/FavoriteStoreSlice";
 import { useCallback, useState } from "react";
 import SizeList from "./SizeList";
-import { addItemsToCart, cartItemsSlice } from "../../features/CartSlice";
+import { addItemsToCart, addToLocalCart } from "../../features/CartSlice";
+import { toast } from "react-toastify";
 
 type CardType = "Regular" | "Detailed";
 
@@ -25,13 +26,11 @@ const ProductCard = ({
 }) => {
   const { isAuthenticated, size } = useSelector(productStoreSlice);
   const { favorites } = useSelector(favoritesProuctsStore);
-  const { cart } = useSelector(cartItemsSlice);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // for logged in users
   const [cookie] = useCookies(["token"]);
   const [sizeError, setSizeError] = useState("");
-
-  const alreadyInCart = cart.find((item) => item.product_id == productData.id);
 
   const saveToFavoritesApi = useCallback(
     (product: Product) => {
@@ -44,6 +43,7 @@ const ProductCard = ({
     },
     [cookie, productData]
   );
+
   const {
     category,
     product_name,
@@ -57,6 +57,7 @@ const ProductCard = ({
 
   const [quantity, setQuantity] = useState(1);
 
+  // saving to the authenticated user data online
   const itemsToAddCartData = {
     category: category,
     product_name: product_name,
@@ -67,19 +68,41 @@ const ProductCard = ({
     size: size,
   };
 
-  const addToCart = () => {
+  // saving to the locally orowsed user data online
+  const itemsToAddCartDataLocally = {
+    category: category,
+    thumbnail: thumbnail,
+    product_name: product_name,
+    product_id: id,
+    old_price: old_price,
+    current_price: price,
+    quantity: quantity,
+    size: size,
+  };
+
+  const addToCartApi = () => {
     if (size === "") {
       setSizeError("Select a size to continue");
-    } else if (!cookie["token"]) {
-      navigate("/signin");
     } else {
       setSizeError("");
       dispatch(
         addItemsToCart({
-          token: cookie["token"],
           product: itemsToAddCartData,
+          token: cookie["token"],
         })
       );
+    }
+  };
+
+  const addToCartLocally = () => {
+    if (size === "") {
+      setSizeError("Select a size to continue");
+    } else {
+      dispatch(addToLocalCart(itemsToAddCartDataLocally));
+      toast.success("added to cart", {
+        autoClose: 400,
+        hideProgressBar: true,
+      });
     }
   };
 
@@ -195,8 +218,11 @@ const ProductCard = ({
               />
             </label>
 
-            <button className="mx-[auto] block" onClick={addToCart}>
-              {alreadyInCart ? "Added To Cart" : "Add To Cart"}
+            <button
+              className="mx-[auto] block"
+              onClick={cookie["token"] ? addToCartApi : addToCartLocally}
+            >
+              Add To Cart
             </button>
           </div>
         </div>

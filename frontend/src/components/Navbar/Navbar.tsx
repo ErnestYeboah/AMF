@@ -43,8 +43,11 @@ const LogoutOutlinedMemo = React.memo(LogoutOutlined);
 
 const Navbar = () => {
   const navigate = useNavigate();
+  //for authenticating users
   const [cookie, , removeCookie] = useCookies(["token"]);
   const dispatch = useDispatch();
+  const { localCart } = useSelector(cartItemsSlice);
+
   const {
     user,
     search_params,
@@ -296,10 +299,12 @@ const Navbar = () => {
           )}
 
           <div className="cart_icon icon_div" data-tooltip="Cart">
-            {cart.length != 0 && cookie["token"] && (
+            {cart.length != 0 && cookie["token"] ? (
               <p className="favorites_count pointer-events-none">
                 {cart.length}
               </p>
+            ) : (
+              localCart && <p className="favorites_count">{localCart.length}</p>
             )}
             <Link to={"/cart"}>
               <ShoppingCartOutlinedMemo className="icon" />

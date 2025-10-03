@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const BASE_URL = `https://amaetonproducts.pythonanywhere.com/api`;
+import { BASE_URL } from "./ProductStoreSlice";
 
 export type Favorite = {
   id: number;
