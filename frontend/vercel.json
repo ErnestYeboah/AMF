@@ -19,10 +19,7 @@
       "src": "/api/(.*)",
       "dest": "api_store/wsgi.py"
     },
-    {
-      "src": "/dist/(.*)",
-      "dest": "dist/static/$1"
-    },
+
     {
       "src": "/(.*)",
       "dest": "dist/index.html"
