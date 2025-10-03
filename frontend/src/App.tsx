@@ -64,7 +64,7 @@ function App() {
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/cart" element={<CartHome />} />
+          <Route path="cart" element={<CartHome />} />
           <Route
             path="/search/:searchparams"
             element={<SearchedProductPage />}
