@@ -187,7 +187,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="links link__nine">
-            <Link to={`cart`}>
+            <Link to={`/cart`}>
               <TbShoppingCart />
               Cart
             </Link>
@@ -306,7 +306,7 @@ const Navbar = () => {
             ) : (
               localCart && <p className="favorites_count">{localCart.length}</p>
             )}
-            <Link to={"cart"}>
+            <Link to={"/cart"}>
               <ShoppingCartOutlinedMemo className="icon" />
             </Link>
           </div>
